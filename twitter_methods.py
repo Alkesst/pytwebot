@@ -31,6 +31,18 @@ class MakingActions:
         """Follow an account_id"""
         self.api.create_friendship(user_id)
 
+    def get_user_from_twit(self, twit_id):
+        """Returns an User object from a given tweet"""
+        tweet = self.get_tweet(twit_id)
+        return tweet.user
+
+    def print_timeline(self):
+        """A method that prints all the tweets from home_timeline"""
+        tweets = self.get_tweets_from_timeline
+        tweets = MakingActions.get_text_from_list(tweets)
+        for items in tweets:
+            print items
+
     def follow_all_followers(self, account_name):
         """Follow all the followers from a list"""
         ids = self.get_followers_id(account_name)
