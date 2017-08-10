@@ -15,6 +15,14 @@ class MakingActions:
         """Creates a new twit"""
         self.api.update_status(str(twit))
 
+    def retweet(self, twit_id):
+        """Retweet a tweet from id"""
+        self.api.retweet(twit_id)
+
+    def get_tweet(self, twit_id):
+        """Return a Status object from a twit ID"""
+        return self.api.get_status(twit_id)
+
     def fav_twit(self, twit_id):
         """Favorites the twit given"""
         self.api.favorites(twit_id)
