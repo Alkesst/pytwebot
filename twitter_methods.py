@@ -19,12 +19,15 @@ class MakingActions:
         """Favorites the twit given"""
         self.api.favorites(twit_id)
 
+    def follow_account(self, user_id):
+        """Follow an account_id"""
+        self.api.create_friendship(user_id)
+
     def follow_all_followers(self, account_name):
-        """Follow all the followers from an account"""
+        """Follow all the followers from a list"""
         ids = self.get_followers_id(account_name)
-        #sigue a todos los users de una lista.
         for friends in ids:
-            self.api.create_friendship(friends)
+            self.follow_account(friends)
 
     def get_followers_id(self, account_name):
         """Returns a list of all the followers of an account"""
@@ -39,7 +42,7 @@ class MakingActions:
     #    for page in tweepy.Cursor(self.api.friends, screen_name=str(account_name)).pages():
     #       ids.extend(page)
     #  return ids
-    
+
     def get_tweets_from_timeline(self):
         """Returns a list of all the tweets from the home timeline"""
         tweets = []
@@ -47,7 +50,8 @@ class MakingActions:
             tweets.extend(tweets)
         return tweets
 
-    def get_id_from_list(self, tweets_list):
+    @staticmethod
+    def get_id_from_list(tweets_list):
         """Gets the id from a list of twits and return a list of all id's from the tweets"""
         ids = []
         for tweets in tweets_list:
@@ -59,3 +63,11 @@ class MakingActions:
         """Fav every twit in a list"""
         for items in list_id:
             self.fav_twit(items)
+
+    @staticmethod
+    def get_text_from_list(tweets_list):
+        """Returns the text of all tweets from a list"""
+        text = []
+        for tweets in tweets_list:
+            text.append(tweets.text)
+        return text
