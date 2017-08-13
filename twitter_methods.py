@@ -123,3 +123,13 @@ class MakingActions:
             print items.text 
             print str(items.favorite_count) + " Favs"
             print str(items.retweet.count) + " Retweets"
+
+    def get_retweets(self, tweet_id=0):
+        """Returns a list of the retweeted tweets from the authenticated api acc.
+        If the argument tweet_id is not equal to 0, then the list will return the earlier tweets
+        than the tweet from the id"""
+        if tweet_id == 0:
+            rts = self.api.retweets_of_me()
+        else:
+            rts = self.api.retweets_of_me(tweet_id)
+        return rts
