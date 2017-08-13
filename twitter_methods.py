@@ -25,11 +25,20 @@ class MakingActions:
 
     def fav_twit(self, twit_id):
         """Favorites the twit given"""
-        self.api.favorites(twit_id)
+        self.api.create_favorite(twit_id)
 
     def follow_account(self, user_id):
         """Follow an account_id"""
         self.api.create_friendship(user_id)
+
+    def get_following(self):
+        """Return a list of the following followers"""
+        following = []
+        followers = self.get_followers(self.api.me.screen_name)
+        for follower in followers:
+            if not follower.following:
+                following.append(follower)
+        return following
 
     def get_user_from_twit(self, twit_id):
         """Returns an User object from a given tweet"""
@@ -45,16 +54,16 @@ class MakingActions:
 
     def follow_all_followers(self, account_name):
         """Follow all the followers from a list"""
-        ids = self.get_followers_id(account_name)
+        ids = self.get_followers(account_name)
         for friends in ids:
             self.follow_account(friends)
 
-    def get_followers_id(self, account_name):
+    def get_followers(self, account_name):
         """Returns a list of all the followers of an account"""
-        ids = []
+        followers = []
         for page in tweepy.Cursor(self.api.followers_ids, screen_name=str(account_name)).pages():
-            ids.extend(page)
-        return ids
+            followers.extend(page)
+        return followers
 
     #def get_following(self, account_name):
     #    """Return a list with all the following accounts"""
@@ -66,8 +75,8 @@ class MakingActions:
     def get_tweets_from_timeline(self):
         """Returns a list of all the tweets from the home timeline"""
         tweets = []
-        for tweets in tweepy.Cursor(self.api.home_timeline).items(200):
-            tweets.extend(tweets)
+        for status in tweepy.Cursor(self.api.home_timeline).items(200):
+            tweets.append(status)
         return tweets
 
     @staticmethod
@@ -91,3 +100,11 @@ class MakingActions:
         for tweets in tweets_list:
             text.append(tweets.text)
         return text
+
+    def folowback(self):
+        """Follow all accounts that follows you and you don't follow them."""
+        followers = self.get_followers(self.api.screen_name)
+        following = self.get_following()
+        for follower in followers:
+            if follower not in following:
+                self.follow_account(follower.id)
