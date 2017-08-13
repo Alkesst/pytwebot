@@ -103,8 +103,23 @@ class MakingActions:
 
     def folowback(self):
         """Follow all accounts that follows you and you don't follow them."""
-        followers = self.get_followers(self.api.screen_name)
+        followers = self.get_followers(self.api.me.screen_name)
         following = self.get_following()
         for follower in followers:
             if follower not in following:
                 self.follow_account(follower.id)
+
+    def get_user_twits(self):
+        """Returns a list of all tweets from the authenticathed API user."""
+        tweets = []
+        for status in tweepy.Cursor(self.api.user_timeline).items():
+            tweets.append(status)
+        return tweets
+
+    def get_interactions_from_twits(self):
+        """Print the number of favs and rt's """
+        tweets = self.get_user_twits()
+        for items in tweets:
+            print items.text 
+            print str(items.favorite_count) + " Favs"
+            print str(items.retweet.count) + " Retweets"
