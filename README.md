@@ -12,3 +12,19 @@ Class PyTweListener: This method will stop the stream if you exceed the allowed 
 
 In the class TwitterMethods you can find some algorithms that you can use with your authenticated twitter account.
 The methods that are commented is because aren't working correctly and I'm trying to fix or replace that methods.
+
+
+These part of the BotListener.py is just for tracking some fragments of text from tweets you want to rt or fav
+```python
+        if "ultra kek 0 name" in status.text:
+            self.actions.retweet(status.id)
+        elif "y naci ciego" in status.text:
+            self.actions.fav_tweet(status.id)
+            self.actions.retweet(status.id)
+        elif "pytwe_bot" in status.text:
+            self.actions.fav_tweet(status.id)
+            self.actions.retweet(status.id)
+        elif "pickle rick" in status.text:
+            self.actions.fav_tweet(status.id)
+            self.actions.retweet(status.id)
+```
