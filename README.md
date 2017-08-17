@@ -9,3 +9,6 @@ Class PyTweListener: This method makes the Stream stop if you exceed the limit n
         if status_code == 420:
             return False
 ```
+
+In the class TwitterMethods you can find some algorithms that you can use with your authenticated twitter account.
+
