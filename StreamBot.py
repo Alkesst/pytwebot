@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """Execution Bot"""
 import tweepy
-from bot import MakingActions
 from PyTweListener import PyTweListener
 
 
@@ -11,17 +10,23 @@ def main():
     consumer_key = ""
     consumer_secret = ""
 
-    access_token = ""
+    access_token = "-"
     access_token_secret = ""
 
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth, wait_on_rate_limit=True)
 
-    listener = PyTweListener()
+
+    listener = PyTweListener(api)
     stream = tweepy.Stream(api.auth, listener)
+    timeline = raw_input("You want to see your home timeline? ")
+    if timeline == "yes":
+        stream.userstream()
     # filtrando tweets por un patrón
     # stream.filter(track=["ultra kek 0 name"])
-    stream.userstream()
+    else:
+        filtr = raw_input("What type of tweets are you looking for? (write the filter) ")
+        stream.filter(track=filtr)
 if __name__ == "__main__":
     main()
