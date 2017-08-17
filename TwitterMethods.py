@@ -10,38 +10,44 @@ class MakingActions:
     def __init__(self, api):
         self.api = api
 
-    def new_twit(self, twit):
-        """Creates a new twit"""
-        self.api.update_status(str(twit))
+    def new_tweet(self, tweet):
+        """Creates a new tweet"""
+        self.api.update_status(str(tweet))
 
-    def retweet(self, twit_id):
+    def retweet(self, tweet_id):
         """Retweet a tweet from id"""
-        self.api.retweet(twit_id)
+        if not self.get_tweet(tweet_id).retweeted:
+            self.api.retweet(tweet_id)
 
-    def get_tweet(self, twit_id):
-        """Return a Status object from a twit ID"""
-        return self.api.get_status(twit_id)
+    def get_tweet(self, tweet_id):
+        """Return a Status object from a tweet ID"""
+        return self.api.get_status(tweet_id)
 
-    def fav_twit(self, twit_id):
-        """Favorites the twit given"""
-        self.api.create_favorite(twit_id)
+    def fav_tweet(self, tweet_id):
+        """Favorites the tweet given"""
+        if not self.get_tweet(tweet_id).favorited:
+            self.api.create_favorite(tweet_id)
 
     def follow_account(self, user_id):
         """Follow an account_id"""
         self.api.create_friendship(user_id)
 
-    def get_following(self):
-        """Return a list of the following followers"""
-        following = []
-        followers = self.get_followers(self.api.me.screen_name)
-        for follower in followers:
-            if not follower.following:
-                following.append(follower)
-        return following
+    def get_api(self):
+        """Returns the API object"""
+        return self.api
 
-    def get_user_from_twit(self, twit_id):
+    #def get_following(self):
+    #    """Return a list of the following followers"""
+    #    following = []
+    #    followers = self.get_followers(self.api.me().screen_name)
+    #    for follower in followers:
+    #        if not follower.following:
+    #            following.append(follower)
+    #    return following
+
+    def get_user_from_tweet(self, tweet_id):
         """Returns an User object from a given tweet"""
-        tweet = self.get_tweet(twit_id)
+        tweet = self.get_tweet(tweet_id)
         return tweet.user
 
     def print_timeline(self):
@@ -73,7 +79,7 @@ class MakingActions:
 
     @staticmethod
     def get_id_from_list(tweets_list):
-        """Gets the id from a list of twits and return a list of all id's from the tweets"""
+        """Gets the id from a list of tweets and return a list of all id's from the tweets"""
         ids = []
         for tweets in tweets_list:
             ids.append(tweets.id)
@@ -81,9 +87,9 @@ class MakingActions:
 
 
     def fav_from_list(self, list_id):
-        """Fav every twit in a list"""
+        """Fav every tweet in a list"""
         for items in list_id:
-            self.fav_twit(items)
+            self.fav_tweet(items)
 
     @staticmethod
     def get_text_from_list(tweets_list):
@@ -93,24 +99,24 @@ class MakingActions:
             text.append(tweets.text)
         return text
 
-    def folowback(self):
-        """Follow all accounts that follows you and you don't follow them."""
-        followers = self.get_followers(self.api.me.screen_name)
-        following = self.get_following()
-        for follower in followers:
-            if follower not in following:
-                self.follow_account(follower.id)
+    #def folowback(self):
+    #    """Follow all accounts that follows you and you don't follow them."""
+    #    followers = self.get_followers(self.api.me().screen_name)
+    #    following = self.get_following()
+    #    for follower in followers:
+    #        if follower not in following:
+    #            self.follow_account(follower.id)
 
-    def get_user_twits(self):
+    def get_user_tweets(self):
         """Returns a list of all tweets from the authenticathed API user."""
         tweets = []
         for status in tweepy.Cursor(self.api.user_timeline).items():
             tweets.append(status)
         return tweets
 
-    def get_interactions_from_twits(self):
+    def get_interactions_from_tweets(self):
         """Print the number of favs and rt's """
-        tweets = self.get_user_twits()
+        tweets = self.get_user_tweets()
         for items in tweets:
             print items.text 
             print str(items.favorite_count) + " Favs"
