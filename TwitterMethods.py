@@ -7,8 +7,7 @@ import tweepy
 class MakingActions:
     """Abstraction of making actions with twitter."""
 
-    def __init__(self, user, api):
-        self.user = user
+    def __init__(self, api):
         self.api = api
 
     def new_twit(self, twit):
@@ -64,13 +63,6 @@ class MakingActions:
         for page in tweepy.Cursor(self.api.followers_ids, screen_name=str(account_name)).pages():
             followers.extend(page)
         return followers
-
-    #def get_following(self, account_name):
-    #    """Return a list with all the following accounts"""
-    #   ids = []
-    #    for page in tweepy.Cursor(self.api.friends, screen_name=str(account_name)).pages():
-    #       ids.extend(page)
-    #  return ids
 
     def get_tweets_from_timeline(self):
         """Returns a list of all the tweets from the home timeline"""
@@ -133,3 +125,15 @@ class MakingActions:
         else:
             rts = self.api.retweets_of_me(tweet_id)
         return rts
+
+    def get_mentions_from_timeline(self):
+        """Returns a list of all the tweets from the home timeline"""
+        tweets = []
+        for status in tweepy.Cursor(self.api.home_timeline, include_entities=True).items(200):
+            if 'user_mentions' in status.entities:
+                tweets.append(str(status.user.screen_name) + " " + str(status.created_at) + "\n" + status.text)
+        mentions = []
+        for items in tweets:
+            if 'pytwe_bot' in items:
+                mentions.append(items)
+        return mentions
