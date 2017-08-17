@@ -11,4 +11,4 @@ Class PyTweListener: This method will stop the stream if you exceed the allowed 
 ```
 
 In the class TwitterMethods you can find some algorithms that you can use with your authenticated twitter account.
-
+The methods that are commented is because aren't working correctly and I'm trying to fix or replace that methods.
