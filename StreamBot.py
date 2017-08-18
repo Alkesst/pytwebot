@@ -27,6 +27,6 @@ def main():
     # stream.filter(track=["ultra kek 0 name"])
     else:
         filtr = raw_input("What type of tweets are you looking for? (write the filter) ")
-        stream.filter(track=filtr)
+        stream.filter(track=[filtr])
 if __name__ == "__main__":
     main()
