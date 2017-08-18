@@ -26,7 +26,11 @@ def main():
     # filtrando tweets por un patrón
     # stream.filter(track=["ultra kek 0 name"])
     else:
-        filtr = raw_input("What type of tweets are you looking for? (write the filter) ")
-        stream.filter(track=[filtr])
+         filtr = []
+        data = raw_input("Add words to filter. type end to finish the list. ")
+        while data != 'end':
+            filtr.append(data)
+            data = raw_input()
+        stream.filter(track=filtr)
 if __name__ == "__main__":
     main()
