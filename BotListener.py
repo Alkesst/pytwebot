@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """Stream listener of PyTweBot"""
 import tweepy
-from bot import MakingActions
+from TwitterMethods import MakingActions
 
 
 class PyTweListener(tweepy.StreamListener):
