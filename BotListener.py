@@ -24,7 +24,7 @@ class PyTweListener(tweepy.StreamListener):
         elif "pytwe_bot" in status.text:
             self.actions.retweet(status.id)
         elif "pickle rick" in status.text:
-            self.actions.retweet(status.id)
+            self.actions.quote_tweet("Dime", status)
 
     def on_error(self, status_code):
         if status_code == 420:
