@@ -8,7 +8,7 @@ from twitter_methods import MakingActions
 class PyTweListener(tweepy.StreamListener):
     """Hey"""
 
-    def __init__(self, api):
+     def __init__(self, api):
         super(PyTweListener, self).__init__()
         self.actions = MakingActions(api)
 
@@ -28,7 +28,7 @@ class PyTweListener(tweepy.StreamListener):
             self.actions.quote_tweet("deja de dar tanto asco porfa \n", status)
         elif "nos vemos" == status.text:
             self.actions.retweet(status.id)
-            self.actions.get_api().update_status("en los bares", status.id)
+            self.actions.get_api().update_status("@" + status.user.screen_name + " en los bares", status.id)
 
     def on_error(self, status_code):
         if status_code == 420:
