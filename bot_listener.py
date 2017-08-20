@@ -14,17 +14,18 @@ class PyTweListener(tweepy.StreamListener):
 
     def on_status(self, status):
         """Print a status text"""
-        status.text = status.text.lower()
         self.actions.fav_tweet(status.id)
         print "@" + status.user.screen_name, status.created_at, status.text
+        status.text = status.text.lower()
         if "ultra kek 0 name" in status.text:
             self.actions.retweet(status.id)
         elif "y naci ciego" in status.text:
             self.actions.retweet(status.id)
         elif "pytwe_bot" in status.text:
-            self.actions.retweet(status.id)
-        elif "pickle rick" in status.text:
-            self.actions.quote_tweet("Dime", status)
+            if status.user.id != self.actions.get_api().me().id and not status.entities['user_mentions']:
+                self.actions.quote_tweet("Dime", status)
+        elif "putos catalufos" in status.text:
+            self.actions.quote_tweet("deja de dar tanto asco porfa \n", status)
 
     def on_error(self, status_code):
         if status_code == 420:
