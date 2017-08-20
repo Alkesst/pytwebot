@@ -6,6 +6,8 @@ Currently the bot is hosted in a Raspberry Pi 3 model b.
 Made with Tweepy 3.5.0 (http://tweepy.readthedocs.io/en/v3.5.0/index.html) and Python 2.7
 
 
+
+
 Class PyTweListener: This method will stop the stream if you exceed the allowed the number of connections to the twitter API
 ```python
     def on_error(self, status_code):
