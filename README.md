@@ -28,3 +28,5 @@ These part of the BotListener.py is just for tracking some fragments of text fro
             self.actions.fav_tweet(status.id)
             self.actions.retweet(status.id)
 ```
+The BotListener is just a class that extends from tweepy.StreamListener. The method on_status is just the actions you'll do when there's a new tweet in the stream. The methon on_error just ends the stream if the stream raises the error 420.
+
