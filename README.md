@@ -34,3 +34,5 @@ These part of the BotListener.py is just for tracking some fragments of text fro
 ```
 The BotListener is just a class that extends from tweepy.StreamListener. The method on_status is just the actions you'll do when there's a new tweet in the stream. The methon on_error just ends the stream if the stream raises the error 420.
 
+
+The script tweet_current_status.py is necessary tu run it in a Raspberry Pi. The script take some info from the current status of the Rpi and tweets it to the world.
