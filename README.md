@@ -36,3 +36,9 @@ The BotListener is just a class that extends from tweepy.StreamListener. The met
 
 
 The script tweet_current_status.py is necessary tu run it in a Raspberry Pi. The script take some info from the current status of the Rpi and tweets it to the world.
+
+The first command executes the program /opt/vc/bin/vcgencmd with the measure_temp argument, and the output it's saved in current_temp, same with current_mem. This is useful information of the RPi's status.
+```python
+    current_temp = subprocess.check_output(["/opt/vc/bin/vcgencmd", "measure_temp"])
+    current_mem = subprocess.check_output(["free", "-h"])
+
