@@ -1,5 +1,6 @@
 # PyTwe-Bot
 A short twitter bot made with Python.
+Currently the bot is hosted in a Raspberry Pi 3 model b. 
 Made with Tweepy 3.5.0 (http://tweepy.readthedocs.io/en/v3.5.0/index.html) and Python 2.7
 
 
