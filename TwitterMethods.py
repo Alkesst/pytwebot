@@ -35,6 +35,11 @@ class MakingActions:
     def get_api(self):
         """Returns the API object"""
         return self.api
+    
+    def quote_tweet(self, text, status):
+        """Quote a status"""
+        self.api.update_status(str(text) + " twitter.com/" + str(status.user.screen_name) + "/status/" + str(status.id))
+
 
     #def get_following(self):
     #    """Return a list of the following followers"""
