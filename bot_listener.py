@@ -26,6 +26,9 @@ class PyTweListener(tweepy.StreamListener):
                 self.actions.quote_tweet("Dime", status)
         elif "putos catalufos" in status.text:
             self.actions.quote_tweet("deja de dar tanto asco porfa \n", status)
+        elif "nos vemos" == status.text:
+            self.actions.retweet(status.id)
+            self.actions.get_api().update_status("en los bares", status.id)
 
     def on_error(self, status_code):
         if status_code == 420:
