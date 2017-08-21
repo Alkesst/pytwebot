@@ -1,14 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# pylint: disable=R0904
+# pylint: disable=C0301
+# pylint: disable=C1001
 """A twitter for console."""
 import tweepy
-
 
 class MakingActions:
     """Abstraction of making actions with twitter."""
 
     def __init__(self, api):
         self.api = api
+        self.followers = self.get_followers(self.api.me().screen_name)
+        #self.file_name = ""
 
     def new_tweet(self, tweet):
         """Creates a new tweet"""
@@ -30,25 +34,16 @@ class MakingActions:
 
     def follow_account(self, user_id):
         """Follow an account_id"""
-        self.api.create_friendship(user_id)
+        if not self.api.get_user(user_id) in self.followers:
+            self.api.create_friendship(user_id)
 
     def get_api(self):
         """Returns the API object"""
         return self.api
-    
+
     def quote_tweet(self, text, status):
         """Quote a status"""
         self.api.update_status(str(text) + " twitter.com/" + str(status.user.screen_name) + "/status/" + str(status.id))
-
-
-    #def get_following(self):
-    #    """Return a list of the following followers"""
-    #    following = []
-    #    followers = self.get_followers(self.api.me().screen_name)
-    #    for follower in followers:
-    #        if not follower.following:
-    #            following.append(follower)
-    #    return following
 
     def get_user_from_tweet(self, tweet_id):
         """Returns an User object from a given tweet"""
@@ -57,15 +52,14 @@ class MakingActions:
 
     def print_timeline(self):
         """A method that prints all the tweets from home_timeline"""
-        tweets = self.get_tweets_from_timeline
+        tweets = self.get_tweets_from_timeline()
         tweets = MakingActions.get_text_from_list(tweets)
         for items in tweets:
             print items
 
-    def follow_all_followers(self, account_name):
+    def follow_from_list(self):
         """Follow all the followers from a list"""
-        ids = self.get_followers(account_name)
-        for friends in ids:
+        for friends in self.followers:
             self.follow_account(friends)
 
     def get_followers(self, account_name):
@@ -104,14 +98,6 @@ class MakingActions:
             text.append(tweets.text)
         return text
 
-    #def folowback(self):
-    #    """Follow all accounts that follows you and you don't follow them."""
-    #    followers = self.get_followers(self.api.me().screen_name)
-    #    following = self.get_following()
-    #    for follower in followers:
-    #        if follower not in following:
-    #            self.follow_account(follower.id)
-
     def get_user_tweets(self):
         """Returns a list of all tweets from the authenticathed API user."""
         tweets = []
@@ -123,7 +109,7 @@ class MakingActions:
         """Print the number of favs and rt's """
         tweets = self.get_user_tweets()
         for items in tweets:
-            print items.text 
+            print items.text
             print str(items.favorite_count) + " Favs"
             print str(items.retweet.count) + " Retweets"
 
