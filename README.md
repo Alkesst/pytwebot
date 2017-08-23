@@ -9,6 +9,8 @@ Made with Tweepy 3.5.0 (http://tweepy.readthedocs.io/en/v3.5.0/index.html) and P
 
 
 Class PyTweListener: This method will stop the stream if you exceed the allowed the number of connections to the twitter API
+The BotListener is just a class that extends from tweepy.StreamListener. The method on_status is just the actions you'll do when there's a new tweet in the stream. The methon on_error just ends the stream if the stream raises the error 420.
+
 ```python
     def on_error(self, status_code):
         if status_code == 420:
@@ -19,7 +21,7 @@ In the class TwitterMethods you can find some algorithms that you can use with y
 The methods that are commented is because aren't working correctly and I'm trying to fix or replace that methods.
 
 
-These part of the BotListener.py is just for tracking some fragments of text from tweets you want to rt or fav
+These part of the BotListener.py is just for tracking some fragments of text from tweets you want to rt or fav.
 ```python
         if "ultra kek 0 name" in status.text:
             self.actions.retweet(status.id)
@@ -30,9 +32,8 @@ These part of the BotListener.py is just for tracking some fragments of text fro
         elif "pickle rick" in status.text:
             self.actions.retweet(status.id)
         elif "pytwe_bot" in status.text:
-            self.actions.quote_tweet("Dime", status)
+            self.actions.quote_tweet("Tell me", status)
 ```
-The BotListener is just a class that extends from tweepy.StreamListener. The method on_status is just the actions you'll do when there's a new tweet in the stream. The methon on_error just ends the stream if the stream raises the error 420.
 
 
 The script tweet_current_status.py is necessary tu run it in a Raspberry Pi. The script take some info from the current status of the Rpi and tweets it to the world.
