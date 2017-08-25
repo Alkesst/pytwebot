@@ -21,7 +21,7 @@ def main():
     quijote = QuijoteTweet("quijote.txt", "kek.txt")
 
     while True:
-        tweet = quijote.open_files()
+        tweet = quijote.get_quijote_tweet()
         api.update_status(tweet)
         sleep(1800)
 
