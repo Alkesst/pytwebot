@@ -20,7 +20,7 @@ class PyTweListener():
             self.actions.retweet(status.id)
             self.actions.fav_tweet(status.id)
             print "@" + status.user.screen_name, status.created_at, status.text
-        elif "pytwe_bot" in text:
+        elif "pytwe_bot" in text and text[0:2] != "RT":
             if status.user.id != self.actions.get_api().me().id and not status.entities['user_mentions']:
                 self.actions.quote_tweet("Dime", status)
             print "@" + status.user.screen_name, status.created_at, status.text
