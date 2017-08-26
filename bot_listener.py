@@ -24,7 +24,7 @@ class PyTweListener():
             if status.user.id != self.actions.get_api().me().id and not status.entities['user_mentions']:
                 self.actions.quote_tweet("Dime", status)
             print "@" + status.user.screen_name, status.created_at, status.text
-        elif "putos catalufos" in text and not status.retweeted:
+        elif "putos catalufos" in text and not text[0:2] != "RT":
             self.actions.quote_tweet("deja de dar tanto asco porfa \n", status)
             print "@" + status.user.screen_name, status.created_at, status.text
         elif text == 'nos vemo':
