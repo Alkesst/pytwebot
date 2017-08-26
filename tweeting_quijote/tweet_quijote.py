@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # pylint: disable=C1001
+# pylint: disable=R0903
 """a"""
 
 class QuijoteTweet():
@@ -31,11 +32,3 @@ class QuijoteTweet():
         position_file.close()
         txt_file.close()
         return line
-
-    def file_lines(self):
-        """a"""
-        pass
-
-    def callate(self):
-        """a"""
-        pass
