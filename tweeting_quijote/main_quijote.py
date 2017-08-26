@@ -4,8 +4,8 @@
 """docstring"""
 from time import sleep
 import tweepy
-from tweeting_quijote.tweet_quijote import QuijoteTweet
-from tweeting_quijote.id_from_file import GettingId
+from tweet_quijote import QuijoteTweet
+from id_from_file import GettingId
 
 def main():
     """Module"""
