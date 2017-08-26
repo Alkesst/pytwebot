@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """Stream listener of PyTweBot"""
+import tweepy
 from twitter_methods import MakingActions
 
-class PyTweListener():
+class PyTweListener(tweepy.StreamListener):
     def __init__(self, api):
         super(PyTweListener, self).__init__()
         self.actions = MakingActions(api)
