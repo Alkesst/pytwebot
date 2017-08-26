@@ -2,22 +2,34 @@ from __future__ import absolute_import, print_function
 
 import tweepy
 
-#Add your tokens from the devs.twitter web 
-consumer_key = ""
-consumer_secret = ""
-#Access tokens are for making actions with your twitter account
-access_token = ""
-access_token_secret = ""
-
-#authenticating your account
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
-
-api = tweepy.API(auth, wait_on_rate_limit=True)
+def main():
+    """Just a main"""
+    consumer_key = ""
+    consumer_secret = ""
 
 
-print(api.me().name)
+    access_token = ""
+    access_token_secret = ""
 
-#A friendly way to ask what do you want to tweet in your account
-tweet = raw_input("Que quieres tweetear?")
-api.update_status(str(tweet))
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_token_secret)
+
+    api = tweepy.API(auth, wait_on_rate_limit=True)
+
+
+    print(api.me().name)
+
+
+
+    if raw_input("El twit contiene alguna imagen? ") == "no":
+        tweet = raw_input("Que quieres tweetear? ")
+        api.update_status(str(tweet))
+
+    else:
+        tweet = raw_input("Que quieres tweetear? ")
+        file_name = raw_input("Que nombre tiene el archivo? ")
+        api.update_with_media(file_name, tweet)
+
+if __name__ == "__main__":
+    main()
+    
