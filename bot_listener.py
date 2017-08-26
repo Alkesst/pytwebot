@@ -25,18 +25,28 @@ class PyTweListener(tweepy.StreamListener):
             if status.user.id != self.actions.get_api().me().id and not status.entities['user_mentions']:
                 self.actions.quote_tweet("Dime", status)
             print "@" + status.user.screen_name, status.created_at, status.text
+            self.actions.fav_tweet(status.id)
         elif "putos catalufos" in text and not text[0:2] != "RT":
             self.actions.quote_tweet("deja de dar tanto asco porfa \n", status)
             print "@" + status.user.screen_name, status.created_at, status.text
-        elif text == 'nos vemo':
+            self.actions.fav_tweet(status.id)
+        elif text == 'nosvemo':
             self.actions.get_api().update_status("@" + status.user.screen_name + " en los bares", status.id)
             print "@" + status.user.screen_name, status.created_at, status.text
-        elif text == 'whenpp te pasa':
+            self.actions.fav_tweet(status.id)
+            self.actions.retweet(status.id)
+        elif text == 'when te pasa':
             self.actions.get_api().update_status('@' + status.user.screen_name + " si xD", status.id)
             print "@" + status.user.screen_name, status.created_at, status.text
+            self.actions.fav_tweet(status.id)
+            self.actions.retweet(status.id)
+        elif text == "mira macho":
+            self.actions.get_api().update_status('@' + status.user.screen_name + " qué te pasa fiera", status.id)
+            print "@" + status.user.screen_name, status.created_at, status.text
+            self.actions.fav_tweet(status.id)
+            self.actions.retweet(status.id)
 
     def on_error(self, status_code):
         if status_code == 420:
             #returning False in on_data disconnects the stream
             return False
-
