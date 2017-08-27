@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+# pylint: disable=C0301
 """Stream listener of PyTweBot"""
+import os
 import tweepy
 from special_actions import SpecialActions
 from twitter_methods import MakingActions
@@ -46,10 +47,12 @@ class PyTweListener(tweepy.StreamListener):
             print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
             self.actions.retweet(status.id)
-        if text[0:16] == "@pytwe_bot seach":
+
+        if text[0:16] == "@pytwe_bot search":
             SpecialActions.create_image_search("meme_template_search.png", text[16:len(text)])
-            self.actions.get_api().update_with_media("meme_generated_search.png", "@" + status.user.screen_name + " " ,in_reply_to_status_id=status.id)
-            
+            self.actions.get_api().update_with_media("generated_meme_search.png", "@" + status.user.screen_name + " ", in_reply_to_status_id=status.id)
+            os.remove("generated_meme_search.png")
+
     def on_error(self, status_code):
         if status_code == 420:
             #returning False in on_data disconnects the stream

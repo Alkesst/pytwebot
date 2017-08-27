@@ -16,9 +16,9 @@ class SpecialActions():
                 cloned.format = 'png'
                 with Drawing() as draw:
                     draw.font_family = 'italic'
-                    draw.font_size = 40
+                    draw.font_size = 30
                     text = SpecialActions.simplifying(text)
-                    draw.text(148, 800, text)
+                    draw.text(148, 736, text)
                     draw(cloned)
                     cloned.save(filename="generated_meme_search.png")
 
