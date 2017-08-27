@@ -1,7 +1,7 @@
 # PyTwe-Bot
 A short twitter bot made with Python.
 
-Currently the bot is hosted in a Raspberry Pi 3 model b. 
+Currently the bot is hosted in a Raspberry Pi 3 model b with Ubuntu 16.04.3. 
 
 Made with Tweepy 3.5.0 (http://tweepy.readthedocs.io/en/v3.5.0/index.html) and Python 2.7
 
@@ -26,4 +26,13 @@ The first command executes the program /opt/vc/bin/vcgencmd with the measure_tem
 ```python
     current_temp = subprocess.check_output(["/opt/vc/bin/vcgencmd", "measure_temp"])
     current_mem = subprocess.check_output(["free", "-h"])
+````
 
+The special_actions.py is a class that makes special things with some python libraries. Currently just creates an image with a given text. If you want to use that class you'll need python-wand, that requieres imagemagick 6.
+
+
+```sh
+    sudo apt-get install python-wand
+```
+
+Ubuntu 16.04.3 has already installed imagemagick 6. 

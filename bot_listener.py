@@ -3,6 +3,7 @@
 
 """Stream listener of PyTweBot"""
 import tweepy
+from special_actions import SpecialActions
 from twitter_methods import MakingActions
 
 class PyTweListener(tweepy.StreamListener):
@@ -30,22 +31,25 @@ class PyTweListener(tweepy.StreamListener):
             self.actions.quote_tweet("deja de dar tanto asco porfa \n", status)
             print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
-        elif text == 'nosvemo':
+        elif text[0:7] == 'nosvemo':
             self.actions.get_api().update_status("@" + status.user.screen_name + " en los bares", status.id)
             print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
             self.actions.retweet(status.id)
-        elif text == 'when te pasa':
+        elif text[0:12] == 'when te pasa':
             self.actions.get_api().update_status('@' + status.user.screen_name + " si xD", status.id)
             print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
             self.actions.retweet(status.id)
-        elif text == "mira macho":
-            self.actions.get_api().update_status('@' + status.user.screen_name + " qué te pasa fiera", status.id)
+        elif text[0:10] == "mira macho":
+            self.actions.get_api().update_status('@' + status.user.screen_name + " que te pasa fiera", status.id)
             print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
             self.actions.retweet(status.id)
-
+        if text[0:16] == "@pytwe_bot seach":
+            SpecialActions.create_image_search("meme_template_search.png", text[16:len(text)])
+            self.actions.get_api().update_with_media("meme_generated_search.png", "@" + status.user.screen_name + " " ,in_reply_to_status_id=status.id)
+            
     def on_error(self, status_code):
         if status_code == 420:
             #returning False in on_data disconnects the stream
