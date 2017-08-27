@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # pylint: disable=C0301
+# pylint: disable=R0912
 """Stream listener of PyTweBot"""
 import os
 import tweepy
@@ -47,6 +48,10 @@ class PyTweListener(tweepy.StreamListener):
             print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
             self.actions.retweet(status.id)
+        elif 'i like botijos' in text:
+            print "@" + status.user.screen_name, status.created_at, status.text
+            self.actions.fav_tweet(status.id)
+            self.actions.retweet(status.id)
 
         if text[0:17] == "@pytwe_bot search":
             try:
@@ -55,7 +60,11 @@ class PyTweListener(tweepy.StreamListener):
                 os.remove("generated_meme_search.png")
             except UnicodeEncodeError:
                 self.actions.get_api().update_status("@" + status.user.screen_name + " evita poner caracteres raros como la cedilla o acentos porfa :)", status.id)
-
+        if text[0:19] == "@pytwe_bot cabezas":
+            try:
+                pass
+            except UnicodeEncodeError:
+                pass
     def on_error(self, status_code):
         if status_code == 420:
             #returning False in on_data disconnects the stream

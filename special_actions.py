@@ -24,11 +24,34 @@ class SpecialActions():
 
     @staticmethod
     def simplifying(text):
-        """Tokenizes the text by fragments of 20 chars"""
+        """Tokenizes the text by fragments of 15s chars"""
         str(text)
-        size = len(text) / 20
+        size = len(text) / 15
         i = 0
         while i < (size - 1):
             text += text[size*0:size*1] + "\n"
             i += 1
         return text
+
+    @staticmethod
+    def preparing_text_cabezas(text):
+        aux_text = u''
+        lista = []
+        for items in text:
+            if text == "\n":
+                lista.append(aux_text)
+            else:
+                aux_text += items
+        i = 0
+        while i < len(lista):
+            aux_var = lista[i]
+            aux_var = SpecialActions.simplifying(aux_var)
+            lista[i] = aux_var
+            i += 1
+        return lista
+
+    @staticmethod
+    def create_image_cabezas(image_name, text):
+        lista = SpecialActions.preparing_text_cabezas(text)
+        
+        
