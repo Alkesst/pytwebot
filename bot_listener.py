@@ -49,9 +49,12 @@ class PyTweListener(tweepy.StreamListener):
             self.actions.retweet(status.id)
 
         if text[0:17] == "@pytwe_bot search":
-            SpecialActions.create_image_search("meme_template_search.png", text[18:len(text)])
-            self.actions.get_api().update_with_media("generated_meme_search.png", "@" + status.user.screen_name + " ", in_reply_to_status_id=status.id)
-            os.remove("generated_meme_search.png")
+            try:
+                SpecialActions.create_image_search("meme_template_search.png", text[18:len(text)])
+                self.actions.get_api().update_with_media("generated_meme_search.png", "@" + status.user.screen_name + " ", in_reply_to_status_id=status.id)
+                os.remove("generated_meme_search.png")
+            except UnicodeEncodeError:
+                self.actions.get_api().update_status("@" + status.user.screen_name + " evita poner caracteres raros como la cedilla o acentos porfa :)", status.id)
 
     def on_error(self, status_code):
         if status_code == 420:
