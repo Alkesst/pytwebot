@@ -48,7 +48,7 @@ class PyTweListener(tweepy.StreamListener):
             self.actions.fav_tweet(status.id)
             self.actions.retweet(status.id)
 
-        if text[0:16] == "@pytwe_bot search":
+        if text[0:17] == "@pytwe_bot search":
             SpecialActions.create_image_search("meme_template_search.png", text[16:len(text)])
             self.actions.get_api().update_with_media("generated_meme_search.png", "@" + status.user.screen_name + " ", in_reply_to_status_id=status.id)
             os.remove("generated_meme_search.png")
