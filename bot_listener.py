@@ -41,7 +41,7 @@ class PyTweListener(tweepy.StreamListener):
             self.actions.fav_tweet(status.id)
             self.actions.retweet(status.id)
         elif text == "mira macho":
-            self.actions.get_api().update_status('@' + status.user.screen_name + " qué te pasa fiera", status.id)
+            self.actions.get_api().update_status('@' + status.user.screen_name + " que te pasa fiera", status.id)
             print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
             self.actions.retweet(status.id)
