@@ -8,6 +8,7 @@ import tweepy
 from special_actions import SpecialActions
 from twitter_methods import MakingActions
 
+
 class PyTweListener(tweepy.StreamListener):
     def __init__(self, api):
         super(PyTweListener, self).__init__()
@@ -52,6 +53,17 @@ class PyTweListener(tweepy.StreamListener):
             print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
             self.actions.retweet(status.id)
+        elif text[0:15] == '@pytwe_bot ping':
+            print "@" + status.user.screen_name, status.created_at, status.text
+            self.actions.fav_tweet(status.id)
+            self.actions.get_api().update_status("@" + status.user.screen_name + " Pong!", status.id)
+        elif text[0:15] == '@pytwe_bot help':
+            print "@" + status.user.screen_name, status.created_at, status.text
+            self.actions.fav_tweet(status.id)
+            help_text = "@pytwe_bot search: te manda un meme personalizado con el texto que le añadas tras el search.\n"
+            help_text += "@pytwe_bot ping: te responde con un pong. Sirve para saber si el bot está en funcionamiento.\n"
+            help_text += "Interacciona con: when te pasa, nosvemo, putos catalufos, pytwe_bot, y naci ciego, ultra kek 0 name\n"
+            self.actions.direct_message(status.user.screen_name, help_text)
 
         if text[0:17] == "@pytwe_bot search":
             try:
@@ -65,7 +77,8 @@ class PyTweListener(tweepy.StreamListener):
                 pass
             except UnicodeEncodeError:
                 pass
+
     def on_error(self, status_code):
         if status_code == 420:
-            #returning False in on_data disconnects the stream
+            # returning False in on_data disconnects the stream
             return False
