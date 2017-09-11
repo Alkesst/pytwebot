@@ -25,7 +25,7 @@ class PyTweListener(tweepy.StreamListener):
             self.actions.retweet(status.id)
             self.actions.fav_tweet(status.id)
             print "@" + status.user.screen_name, status.created_at, status.text
-        elif "pytwe_bot" in text and text[0:2] != "RT":
+        elif ("pytwe_bot" in text or "pytwe" in text) and text[0:2] != "RT":
             if status.user.id != self.actions.get_api().me().id and not status.entities['user_mentions']:
                 self.actions.quote_tweet("Dime", status)
             print "@" + status.user.screen_name, status.created_at, status.text
@@ -53,17 +53,17 @@ class PyTweListener(tweepy.StreamListener):
             print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
             self.actions.retweet(status.id)
-        elif text[0:15] == '@pytwe_bot ping':
+        if text[0:15] == '@pytwe_bot ping':
             print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
-            self.actions.get_api().update_status("@" + status.user.screen_name + " Pong!", status.id)
+            self.actions.get_api().update_status(status=("@" + status.user.screen_name + " Pong!"), in_reply_to_status_id=status.id)
         elif text[0:15] == '@pytwe_bot help':
             print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
             help_text = "@pytwe_bot search: te manda un meme personalizado con el texto que le añadas tras el search.\n"
             help_text += "@pytwe_bot ping: te responde con un pong. Sirve para saber si el bot está en funcionamiento.\n"
             help_text += "Interacciona con: when te pasa, nosvemo, putos catalufos, pytwe_bot, y naci ciego, ultra kek 0 name\n"
-            self.actions.direct_message(status.user.screen_name, help_text)
+            self.actions.get_api().send_direct_message(screen_name=status.user.screen_name, text=help_text)
 
         if text[0:17] == "@pytwe_bot search":
             try:
