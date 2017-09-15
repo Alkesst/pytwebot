@@ -1,0 +1,8 @@
+[Unit]
+Description=PyTwe-Bot
+
+[Service]
+ExecStart=/home/pi/rpi_pytwe_script.sh
+
+[Install]
+WantedBy=multi-user.target

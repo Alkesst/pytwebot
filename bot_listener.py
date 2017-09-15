@@ -61,7 +61,7 @@ class PyTweListener(tweepy.StreamListener):
             print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
             help_text = "@pytwe_bot search: te manda un meme personalizado con el texto que le añadas tras el search.\n"
-            help_text += "@pytwe_bot ping: te responde con un pong. Sirve para saber si el bot está en funcionamiento.\n"
+            help_text += "@pytwe_bot ping: te responde con un pong. Sirve para saber si el bot está en funcionamiento.\n\n"
             help_text += "Interacciona con: when te pasa, nosvemo, putos catalufos, pytwe_bot, y naci ciego, ultra kek 0 name\n"
             self.actions.get_api().send_direct_message(screen_name=status.user.screen_name, text=help_text)
 

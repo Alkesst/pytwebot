@@ -1,7 +1,7 @@
 # PyTwe-Bot
 A short twitter bot made with Python.
 
-Currently the bot is hosted in a Raspberry Pi 3 model b with Ubuntu 16.04.3. 
+Currently the bot is hosted in a Raspberry Pi 3 model b with Ubuntu 16.04.3.
 
 Made with Tweepy 3.5.0 (http://tweepy.readthedocs.io/en/v3.5.0/index.html) and Python 2.7
 
@@ -35,4 +35,37 @@ The special_actions.py is a class that makes special things with some python lib
     sudo apt-get install python-wand
 ```
 
-Ubuntu 16.04.3 has already installed imagemagick 6. 
+Ubuntu 16.04.3 has already installed imagemagick 6.
+
+For initialize the bot when the rpi powers on you can use a service that executes a bash script like this:
+```sh
+    cd /home/user_name/PyTwe-Bot
+    echo "Pulling PyTwe-Bot..."
+    echo
+    git pull
+    echo
+    echo "Pull done..."
+    echo "Initializating PyTwe-Bot..."
+    echo nope | python stream_bot.py
+```
+The script before executes the bot, check if there was any change in the code, and starts up the bot with the new changes.
+Now yo need to make the pytwe.service file, it's something like this:
+```
+[Unit]
+Description=PyTwe-Bot
+
+[Service]
+ExecStart=/home/pi/rpi_pytwe_script.sh
+
+[Install]
+WantedBy=multi-user.target
+```
+Then, you need to put this file into /etc/systemd/system/ and use this command:
+```sh
+    sudo systemctl enable pytwe.service
+```
+Don't forget this:
+```sh
+    chmod +x rpi_pytwe_script.sh
+```
+And now the script rpi_pytwe_script.sh will run always that the rpi powers on.
