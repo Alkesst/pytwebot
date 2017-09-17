@@ -3,6 +3,8 @@ Description=PyTwe-Bot
 
 [Service]
 ExecStart=/home/pi/rpi_pytwe_script.sh
+User=pi
+Group=pi
 
 [Install]
 WantedBy=multi-user.target

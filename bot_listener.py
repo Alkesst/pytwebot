@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=C0301
 # pylint: disable=R0912
+# pylint: disable=E0012
 """Stream listener of PyTweBot"""
 import os
 import tweepy
