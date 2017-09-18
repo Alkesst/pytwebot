@@ -7,11 +7,10 @@ from bot_listener import PyTweListener
 
 def main():
     """Bot"""
-    consumer_key = ""
-    consumer_secret = ""
-
-    access_token = "-"
-    access_token_secret = ""
+    consumer_key = "GvyW21D2vYcP6VU1MALnpqa5t"
+    consumer_secret = "e6njXmtk2CtPqSVU2PNs4neBEUkHrzHHse7eK9tOSOMvwNxVD5"
+    access_token = "895306836345323520-jHuEuGn8CHTLhEjJ9T5MCnsxUXFE8nq"
+    access_token_secret = "OdVrxNhDjgvTrOvCV1MJd5VuaK6bz4I6szyz8SaLZl0Qa"
 
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
