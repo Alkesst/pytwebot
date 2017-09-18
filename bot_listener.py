@@ -65,6 +65,9 @@ class PyTweListener(tweepy.StreamListener):
             help_text += "@pytwe_bot ping: te responde con un pong. Sirve para saber si el bot está en funcionamiento.\n\n"
             help_text += "Interacciona con: when te pasa, nosvemo, putos catalufos, pytwe_bot, y naci ciego, ultra kek 0 name\n"
             self.actions.get_api().send_direct_message(screen_name=status.user.screen_name, text=help_text)
+        elif "hora botijo" in text:
+            self.actions.fav_tweet(status.id)
+            self.actions.retweet(status.id)
 
         if text[0:17] == "@pytwe_bot search":
             to_image = text.encode('utf-8')

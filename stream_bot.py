@@ -24,7 +24,7 @@ def main():
     # filtrando tweets por un patrón
     # stream.filter(track=["ultra kek 0 name"])
     else:
-        filtr = ["ultra kek 0 name", "pytwe_bot", "i like botijos", "when te pasa", "y naci ciego", "nosvemo", "@pytwe_bot search"]
+        filtr = ["ultra kek 0 name", "pytwe_bot", "i like botijos", "when te pasa", "y naci ciego", "nosvemo", "@pytwe_bot search", "hora botijo"]
         # data = raw_input("Add words to filter. type end to finish the list. ")
         # while data != 'end':
         #    filtr.append(data)
