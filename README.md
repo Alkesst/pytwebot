@@ -1,5 +1,5 @@
 # PyTwe-Bot
-A short twitter bot made with Python.
+###### A Twitter bot.
 ## INTRODUCTION:
 
 Currently the bot is hosted in a Raspberry Pi 3 model b with Ubuntu 16.04.3.
@@ -10,7 +10,7 @@ Made with Tweepy 3.5.0 (http://tweepy.readthedocs.io/en/v3.5.0/index.html) and P
 
 
 Class PyTweListener: This method will stop the stream if you exceed the allowed number of connections to the twitter API.
-The BotListener is just a class that extends from tweepy.StreamListener. The method on_status is just the actions you'll do when there's a new tweet in the stream. The methon on_error just ends the stream if the stream raises the error 420.
+The BotListener is just a class that extends from tweepy.StreamListener. The method on_status filter the tweets and checks whether it can do something with that tweet, for example, fav it or reply to it with an image. The methon on_error just ends the stream if the stream raises the error 420.
 
 ```python
     def on_error(self, status_code):

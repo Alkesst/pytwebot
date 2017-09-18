@@ -4,6 +4,7 @@
 # pylint: disable=R0903
 """a"""
 
+
 class QuijoteTweet():
     """a"""
 
@@ -13,7 +14,7 @@ class QuijoteTweet():
         self.list = []
 
     def get_quijote_tweet(self):
-        """make all the process"""
+        """Make all the process"""
         txt_file = open(self.file_name_read, 'r')
         seekline = 0
         try:
@@ -23,7 +24,6 @@ class QuijoteTweet():
             position_file.close()
         except IOError:
             seekline = 0
-        print seekline
         line = txt_file.read(139)
         position_file = open(self.file_name_write, 'w')
         pos = line.rfind(" ")

@@ -3,6 +3,7 @@
 from wand.image import Image
 from wand.drawing import Drawing
 
+
 class SpecialActions():
 
     def __init__(self):
@@ -10,7 +11,7 @@ class SpecialActions():
 
     @staticmethod
     def create_image_search(image_name, text):
-        """creates an image with the given string"""
+        """Create an image with the given string"""
         with Image(filename=image_name) as img:
             with img.clone() as cloned:
                 cloned.format = 'png'
@@ -53,5 +54,4 @@ class SpecialActions():
     @staticmethod
     def create_image_cabezas(image_name, text):
         lista = SpecialActions.preparing_text_cabezas(text)
-        
-        
+        # not finished

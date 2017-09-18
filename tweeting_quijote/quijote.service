@@ -1,0 +1,12 @@
+[Unit]
+Description=PyTwe-Bot
+Requires=pytwe.service
+After=pytwe.service
+
+[Service]
+ExecStart=/home/pi/rpi_quijote_script.sh
+User=pi
+Group=pi
+
+[Install]
+WantedBy=multi-user.target

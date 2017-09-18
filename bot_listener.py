@@ -67,8 +67,9 @@ class PyTweListener(tweepy.StreamListener):
             self.actions.get_api().send_direct_message(screen_name=status.user.screen_name, text=help_text)
 
         if text[0:17] == "@pytwe_bot search":
+            to_image = text[18:len(text)].encode('utf-8')
             try:
-                SpecialActions.create_image_search("meme_template_search.png", text[18:len(text)])
+                SpecialActions.create_image_search("meme_template_search.png", to_image)
                 self.actions.get_api().update_with_media("generated_meme_search.png", "@" + status.user.screen_name + " ", in_reply_to_status_id=status.id)
                 os.remove("generated_meme_search.png")
             except UnicodeEncodeError:
