@@ -21,45 +21,35 @@ class PyTweListener(tweepy.StreamListener):
         if "ultra kek 0 name" in text:
             self.actions.retweet(status.id)
             self.actions.fav_tweet(status.id)
-            print "@" + status.user.screen_name, status.created_at, status.text
         elif "y naci ciego" in text:
             self.actions.retweet(status.id)
             self.actions.fav_tweet(status.id)
-            print "@" + status.user.screen_name, status.created_at, status.text
         elif ("pytwe_bot" in text or "pytwe" in text) and text[0:2] != "RT":
             if status.user.id != self.actions.get_api().me().id and not status.entities['user_mentions']:
                 self.actions.quote_tweet("Dime", status)
-            print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
         elif "putos catalufos" in text and not text[0:2] != "RT":
             self.actions.quote_tweet("deja de dar tanto asco porfa \n", status)
-            print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
         elif text[0:7] == 'nosvemo':
             self.actions.get_api().update_status("@" + status.user.screen_name + " en los bares", status.id)
-            print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
             self.actions.retweet(status.id)
         elif text[0:12] == 'when te pasa':
             self.actions.get_api().update_status('@' + status.user.screen_name + " si xD", status.id)
-            print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
             self.actions.retweet(status.id)
         elif text[0:10] == "mira macho":
             self.actions.get_api().update_status('@' + status.user.screen_name + " que te pasa fiera", status.id)
-            print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
             self.actions.retweet(status.id)
         elif 'i like botijos' in text:
-            print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
             self.actions.retweet(status.id)
         if text[0:15] == '@pytwe_bot ping':
-            print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
             self.actions.get_api().update_status(status=("@" + status.user.screen_name + " Pong!"), in_reply_to_status_id=status.id)
         elif text[0:15] == '@pytwe_bot help':
-            print "@" + status.user.screen_name, status.created_at, status.text
             self.actions.fav_tweet(status.id)
             help_text = "@pytwe_bot search: te manda un meme personalizado con el texto que le añadas tras el search.\n"
             help_text += "@pytwe_bot ping: te responde con un pong. Sirve para saber si el bot está en funcionamiento.\n\n"

@@ -1,3 +1,6 @@
 *.pyc
 .DS_Store
 meme_template_search.png
+.idea/
+.json
+tokens.json

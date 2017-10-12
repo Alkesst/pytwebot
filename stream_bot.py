@@ -1,16 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Execution Bot"""
+import json
 import tweepy
 from bot_listener import PyTweListener
 
 
 def main():
     """Bot"""
-    consumer_key = ""
-    consumer_secret = ""
-    access_token = ""
-    access_token_secret = ""
+    json_config = open("tokens.json", 'r')
+    tokens = json.load(json_config)
+    json_config.close()
+    consumer_key = tokens["consumer_key"]
+    consumer_secret = tokens["consumer_secret"]
+    access_token = tokens["access_token"]
+    access_token_secret = tokens["access_token_secret"]
 
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
