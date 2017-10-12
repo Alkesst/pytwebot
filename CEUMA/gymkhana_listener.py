@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 # Made with python 2.7
 # @Alkesstt at twitter. Alkesst @ telegram and GitHub.
-import tweepy
 from gymkhana_ceuma import *
 
 
@@ -15,10 +14,10 @@ class GymkhanaListener(tweepy.StreamListener):
         if status[0:31] == u'@pytwe_bot gymkhana informatica':
             self.ceuma.tweeting_images(status.user.id, status.id)
         if status[0:22] == u'@pytwe_bot encontrado!':
-            self.ceuma.tweet(status.user.id)
+            self.ceuma.tweeting_felicitacion(status.user.id, status.status.id)
 
     def on_error(self, status_code):
         generic_var = True
         if status_code == 420:
-            generic_var =  False
+            generic_var = False
         return generic_var

@@ -7,7 +7,6 @@ from os import listdir
 from os.path import isfile, join
 
 
-
 class GymkanaCEUMA(object):
 
     def __init__(self, api, path):
