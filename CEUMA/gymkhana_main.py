@@ -8,7 +8,6 @@ from gymkhana_listener import *
 
 
 def gymkhana_main():
-
     json_config = open('tokens.json', 'r')
     tokens = json.load(json_config)
     json_config.close()

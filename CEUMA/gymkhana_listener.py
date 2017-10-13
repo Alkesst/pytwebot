@@ -11,10 +11,10 @@ class GymkhanaListener(tweepy.StreamListener):
         self.ceuma = GymkanaCEUMA(api, '/home/genericUsername/CEUMA/')
 
     def on_status(self, status):
-        if status[0:31] == u'@pytwe_bot gymkhana informatica':
+        if status.text[0:31] == u'@pytwe_bot gymkhana informatica':
             self.ceuma.tweeting_images(status.user.id, status.id)
-        if status[0:22] == u'@pytwe_bot encontrado!':
-            self.ceuma.tweeting_felicitacion(status.user.id, status.status.id)
+        if status.text[0:21] == u'@pytwe_bot encontrado':
+            self.ceuma.tweeting_felicitacion(status.user.id, status.id)
 
     def on_error(self, status_code):
         generic_var = True
